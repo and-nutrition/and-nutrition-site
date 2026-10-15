@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -79,31 +78,8 @@
       cursor: pointer;
     }
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: wait;
-    }
-
-    .status {
-      display: none;
-      margin: 0 0 20px;
-      padding: 12px 14px;
-      border-radius: 6px;
-      overflow-wrap: anywhere;
-    }
-
-    .status.success {
-      display: block;
-      background: #eef8f0;
-      color: #205b2d;
-      border: 1px solid #b7dfbf;
-    }
-
-    .status.error {
-      display: block;
-      background: #fff1f0;
-      color: #8b1e18;
-      border: 1px solid #e9b7b3;
+    button:hover {
+      background: #444;
     }
 
     .required {
@@ -130,16 +106,8 @@
       ご質問・ご相談はこちらからお送りください。
     </p>
 
-    <div
-      id="form-status"
-      class="status"
-      role="status"
-      aria-live="polite"
-      tabindex="-1"
-    ></div>
-
+    <!-- actionにFormspreeのエンドポイント、methodにPOSTを指定 -->
     <form
-      id="contact-form"
       action="https://formspree.io/f/mzedjoan"
       method="POST"
     >
@@ -186,7 +154,7 @@
         ></textarea>
       </div>
 
-      <button id="submit-button" type="submit">
+      <button type="submit">
         送信する
       </button>
     </form>
@@ -195,70 +163,5 @@
       <a href="/">トップページへ戻る</a>
     </p>
   </main>
-
-  <script>
-    const form = document.getElementById("contact-form");
-    const statusBox = document.getElementById("form-status");
-    const submitButton = document.getElementById("submit-button");
-
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      statusBox.className = "status";
-      statusBox.textContent = "";
-
-      submitButton.disabled = true;
-      submitButton.textContent = "送信中...";
-
-      try {
-        const response = await fetch(form.action, {
-          method: "POST",
-          body: new FormData(form),
-          headers: {
-            "Accept": "application/json"
-          }
-        });
-
-        if (response.ok) {
-          statusBox.className = "status success";
-          statusBox.textContent =
-            "お問い合わせを送信しました。ありがとうございます。";
-
-          form.reset();
-        } else {
-          let detail = "";
-
-          try {
-            const result = await response.json();
-
-            if (Array.isArray(result.errors)) {
-              detail = result.errors
-                .map(function (error) {
-                  return error.message;
-                })
-                .filter(Boolean)
-                .join(" ");
-            }
-          } catch (error) {
-            // エラー応答がJSONでない場合
-          }
-
-          statusBox.className = "status error";
-          statusBox.textContent =
-            "送信できませんでした。時間をおいて再度お試しください。" +
-            (detail ? " 詳細：" + detail : "") +
-            " 解決しない場合は、フォームの設定をご確認ください。";
-        }
-      } catch (error) {
-        statusBox.className = "status error";
-        statusBox.textContent =
-          "通信に失敗しました。インターネット接続を確認し、再度お試しください。";
-      } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = "送信する";
-        statusBox.focus();
-      }
-    });
-  </script>
 </body>
 </html>
