@@ -1,41 +1,264 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>お問い合わせ | &NUTRITION</title>
+  <meta name="theme-color" content="#ffffff">
+  <title>お問い合わせ | &amp;NUTRITION</title>
+
   <style>
-    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
-    h1 { text-align: center; color: #333; }
-    .form-group { margin-bottom: 20px; }
-    label { display: block; margin-bottom: 5px; font-weight: bold; }
-    input[type="text"], input[type="email"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-    button { background-color: #2da44e; color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; }
-    button:hover { background-color: #2c974b; }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+      line-height: 1.7;
+      color: #222;
+      background: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.7rem;
+      margin: 0 0 12px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #555;
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      font: inherit;
+      background: #fff;
+      color: #222;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 2px solid #555;
+      outline-offset: 2px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 6px;
+      background: #222;
+      color: #fff;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .status {
+      display: none;
+      margin: 0 0 20px;
+      padding: 12px 14px;
+      border-radius: 6px;
+      overflow-wrap: anywhere;
+    }
+
+    .status.success {
+      display: block;
+      background: #eef8f0;
+      color: #205b2d;
+      border: 1px solid #b7dfbf;
+    }
+
+    .status.error {
+      display: block;
+      background: #fff1f0;
+      color: #8b1e18;
+      border: 1px solid #e9b7b3;
+    }
+
+    .required {
+      color: #a32121;
+      font-size: 0.9em;
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .back a {
+      color: inherit;
+    }
   </style>
 </head>
+
 <body>
+  <main>
+    <h1>お問い合わせ</h1>
 
-  <h1>お問い合わせ</h1>
+    <p class="intro">
+      ご質問・ご相談はこちらからお送りください。
+    </p>
 
-  <form action="https://formspree.io/f/mzedjoan" method="POST">
-    <div class="form-group">
-      <label for="name">お名前</label>
-      <input type="text" id="name" name="name" required placeholder="山田 太郎">
-    </div>
+    <div
+      id="form-status"
+      class="status"
+      role="status"
+      aria-live="polite"
+      tabindex="-1"
+    ></div>
 
-    <div class="form-group">
-      <label for="email">メールアドレス</label>
-      <input type="email" id="email" name="email" required placeholder="example@example.com">
-    </div>
+    <form
+      id="contact-form"
+      action="https://formspree.io/f/mzedjoan"
+      method="POST"
+    >
+      <div class="form-group">
+        <label for="name">
+          お名前 <span class="required">（必須）</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          autocomplete="name"
+          required
+          placeholder="山田 太郎"
+        >
+      </div>
 
-    <div class="form-group">
-      <label for="message">お問い合わせ内容</label>
-      <textarea id="message" name="message" rows="6" required placeholder="お問い合わせ内容をご記入ください"></textarea>
-    </div>
+      <div class="form-group">
+        <label for="email">
+          メールアドレス
+          <span class="required">（必須）</span>
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          autocomplete="email"
+          required
+          placeholder="example@example.com"
+        >
+      </div>
 
-    <button type="submit">送信する</button>
-  </form>
+      <div class="form-group">
+        <label for="message">
+          お問い合わせ内容
+          <span class="required">（必須）</span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="6"
+          required
+          placeholder="お問い合わせ内容をご記入ください"
+        ></textarea>
+      </div>
 
+      <button id="submit-button" type="submit">
+        送信する
+      </button>
+    </form>
+
+    <p class="back">
+      <a href="/">トップページへ戻る</a>
+    </p>
+  </main>
+
+  <script>
+    const form = document.getElementById("contact-form");
+    const statusBox = document.getElementById("form-status");
+    const submitButton = document.getElementById("submit-button");
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      statusBox.className = "status";
+      statusBox.textContent = "";
+
+      submitButton.disabled = true;
+      submitButton.textContent = "送信中...";
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+        if (response.ok) {
+          statusBox.className = "status success";
+          statusBox.textContent =
+            "お問い合わせを送信しました。ありがとうございます。";
+
+          form.reset();
+        } else {
+          let detail = "";
+
+          try {
+            const result = await response.json();
+
+            if (Array.isArray(result.errors)) {
+              detail = result.errors
+                .map(function (error) {
+                  return error.message;
+                })
+                .filter(Boolean)
+                .join(" ");
+            }
+          } catch (error) {
+            // エラー応答がJSONでない場合
+          }
+
+          statusBox.className = "status error";
+          statusBox.textContent =
+            "送信できませんでした。時間をおいて再度お試しください。" +
+            (detail ? " 詳細：" + detail : "") +
+            " 解決しない場合は、フォームの設定をご確認ください。";
+        }
+      } catch (error) {
+        statusBox.className = "status error";
+        statusBox.textContent =
+          "通信に失敗しました。インターネット接続を確認し、再度お試しください。";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "送信する";
+        statusBox.focus();
+      }
+    });
+  </script>
 </body>
 </html>
