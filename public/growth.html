@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>成長曲線プロット | &NUTRITION</title>
+<meta name="description" content="年齢・身長・体重を入力すると、日本人小児の成長曲線上の位置と肥満度がわかる無料ツール。結果に合わせて肥満・やせの解説記事も案内します。">
+<link rel="canonical" href="https://and-nutrition88.netlify.app/growth">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="&amp;NUTRITION">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="成長曲線プロット | &amp;NUTRITION">
+<meta property="og:description" content="年齢・身長・体重を入力すると、日本人小児の成長曲線上の位置と肥満度がわかる無料ツール。結果に合わせて肥満・やせの解説記事も案内します。">
+<meta property="og:url" content="https://and-nutrition88.netlify.app/growth">
+<meta property="og:image" content="https://and-nutrition88.netlify.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "成長曲線プロット", "description": "年齢・身長・体重を入力すると、日本人小児の成長曲線上の位置と肥満度がわかる無料ツール。結果に合わせて肥満・やせの解説記事も案内します。", "url": "https://and-nutrition88.netlify.app/growth", "applicationCategory": "HealthApplication", "operatingSystem": "Any", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "publisher": {"@type": "Organization", "name": "&NUTRITION", "url": "https://and-nutrition88.netlify.app/"}, "author": {"@type": "Person", "name": "YASUNORI", "jobTitle": "管理栄養士", "url": "https://and-nutrition88.netlify.app/staff"}}</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF8EC;--card:#FFFFFF;--ink:#2B2A28;--soft:#6B655C;--acc:#C9680F;--line:#EBDDC3;--pt:#0E9F92;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html,body{margin:0;background:var(--bg)}*{box-sizing:border-box}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);line-height:1.8}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+a{color:var(--acc)}
+.top{padding:18px 0;border-bottom:1px solid var(--line);font-size:13px;background:#FFEBCB}.top a{text-decoration:none;font-weight:700}
+h1{font-family:Montserrat,'Noto Sans JP',sans-serif;font-weight:800;font-size:24px;margin:28px 0 6px}
+h2{font-size:16px;border-left:4px solid var(--acc);padding-left:10px;margin:32px 0 10px}
+p{font-size:14px;color:var(--soft);margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.f{flex:1;min-width:120px}
+label{display:block;font-size:12px;color:var(--soft);margin-bottom:4px}
+input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:4px;background:#FFFDF8;color:var(--ink);font:inherit;font-size:16px}
+.seg{display:flex;gap:8px}.seg button{flex:1}
+button{font:inherit;font-size:14px;font-weight:700;padding:11px 16px;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+button.on,button.go{background:var(--acc);color:#fff;border-color:var(--acc)}
+.acts{display:flex;gap:10px;flex-wrap:wrap}
+#err{color:#E8806A;font-size:13px;min-height:20px;margin:8px 0 0}
+svg{width:100%;height:auto;display:block}
+.res{font-size:14px;color:var(--ink)}.res b{color:var(--acc)}
+.tag{display:inline-block;padding:1px 10px;border-radius:999px;border:1px solid var(--acc);color:var(--acc);font-size:12px;font-weight:700;margin-left:6px}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--soft);margin-top:6px}
+.small{font-size:12px;color:var(--soft)}
+.lnk{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:14px;padding:12px;border-radius:3px;margin-top:10px;border:1px solid var(--acc);color:var(--acc)}
+.lnk.pri{background:var(--acc);color:#fff}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}td,th{padding:6px 4px;border-top:1px solid var(--line);text-align:left;color:var(--soft)}
+.byline{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:var(--ink-soft,var(--soft,#888));margin:14px 0 4px;line-height:1.7}
+.byline a{color:var(--apricot,var(--acc,#F2A34C));text-decoration:none;font-weight:700}
+.related{margin:48px auto 8px}
+.related h2{font-size:16px;margin:0 0 12px}
+.related a{display:block;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;text-decoration:none;color:inherit}
+.related a b{display:block;font-size:15px;line-height:1.6}
+.related a span{display:block;font-size:12px;color:var(--ink-soft,var(--soft,#888));line-height:1.6}
+@media (hover:hover){.related a:hover{border-color:var(--apricot,var(--acc,#F2A34C))}}
+.flinks{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;margin:0 0 12px}
+.flinks a{color:inherit;text-decoration:none;opacity:.8}
+.sitefoot{border-top:1px solid var(--line);margin-top:40px;padding:20px 0 40px}
+.sitefoot .wrap{padding-top:0}
+.sitefoot .small{font-size:12px;color:var(--ink-soft,var(--soft,#888))}
+</style></head><body>
+<div class="top"><div class="wrap"><a href="/kids-thin">&larr; 記事にもどる</a></div></div>
+<main class="wrap">
+<h1>成長曲線プロット</h1>
+
+<div class="byline"><span>監修:<a href="/staff">管理栄養士 YASUNORI</a></span><span>公開日:<time datetime="2026-10-08">2026.10.08</time></span><span>更新日:<time datetime="2026-10-08">2026.10.08</time></span></div><p>お子さんの年齢・身長・体重を入力すると、日本人小児の標準値のなかでの位置がわかります。測定のたびに追加すると、曲線の流れも見られます。</p>
+<div class="card">
+ <div class="row"><div class="f"><label>性別</label><div class="seg"><button id="sm" class="on" type="button">男の子</button><button id="sf" type="button">女の子</button></div></div></div>
+ <div class="row">
+  <div class="f"><label>年齢(歳)</label><select id="ay"></select></div>
+  <div class="f"><label>月</label><select id="am"></select></div>
+  <div class="f"><label>身長(cm)</label><input id="h" type="number" inputmode="decimal" step="0.1" placeholder="例 105.0"></div>
+  <div class="f"><label>体重(kg)</label><input id="w" type="number" inputmode="decimal" step="0.1" placeholder="例 17.0"></div>
+ </div>
+ <div class="acts"><button class="go" id="add" type="button">プロットに追加</button><button id="clr" type="button">全部消す</button></div>
+ <div id="err"></div>
+</div>
+<h2>身長の成長曲線</h2>
+<div class="card"><div id="c1"></div>
+<div class="leg"><span style="color:var(--acc)">━ 平均</span><span>─ ±1SD</span><span>┄ ±2SD</span><span style="color:var(--pt)">● あなたの記録</span></div></div>
+<h2>体重の判定(肥満度)</h2>
+<div class="card"><div id="c2"></div>
+<div class="leg"><span style="color:var(--acc)">━ 標準体重</span><span>┄ ±20%</span><span>· ±15%(幼児)</span><span style="color:var(--pt)">● あなたの記録</span></div></div>
+<h2>結果(最新の記録)</h2>
+<div class="card res" id="res">年齢・身長・体重を入力してください。</div>
+<table id="tb"></table>
+<p class="small" style="margin-top:28px">出典:2000年度乳幼児身体発育調査・学校保健統計調査をもとにした日本成長学会・日本小児内分泌学会合同標準値委員会「2000年日本人小児の体格 標準値」(平均身長とSD、性別・身長別標準体重)。体重は正規分布しないため、体重の評価は平均±SDではなく肥満度で行っています。これは診断ではありません。曲線から外れている、曲線を横切って下がる・上がるときは、小児科に相談してください。入力した記録は、このブラウザ(この端末)にだけ保存され、サーバーには送信されません。他の端末とは共有されず、ブラウザのデータを消すと記録も消えます。「全部消す」で記録を削除できます。</p>
+<div style="height:40px"></div>
+</main>
+<script>
+var HM=[49.0,61.4,67.8,71.7,75.0,77.8,80.5,83.1,85.4,87.6,89.6,91.5,93.3,95.1,96.9,98.6,100.2,101.9,103.5,105.1,106.7,108.3,110.0,111.6,113.3,115.0,116.7,118.2,119.6,121.1,122.5,123.9,125.3,126.7,128.1,129.5,130.9,132.2,133.6,135.0,136.4,137.7,139.1,140.7,142.2,143.8,145.3,147.2,149.1,151.0,152.9,154.7,156.5,158.2,160.0,161.4,162.8,164.1,165.5,166.3,167.1,167.8,168.6,169.0,169.4,169.7,170.1,170.3,170.5];
+var HS=[2.1,2.2,2.4,2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.2,3.3,3.5,3.6,3.7,3.8,3.9,4.0,4.1,4.2,4.3,4.4,4.5,4.7,4.8,4.9,5.0,5.0,5.1,5.1,5.1,5.2,5.3,5.4,5.5,5.5,5.6,5.7,5.7,5.8,5.9,6.0,6.1,6.4,6.6,6.9,7.1,7.4,7.6,7.8,8.1,8.0,7.9,7.8,7.7,7.4,7.1,6.8,6.5,6.3,6.2,6.0,5.9,5.9,5.8,5.8,5.8,5.8,5.8];
+var FM=[48.4,60.0,66.2,70.0,73.4,76.5,79.4,82.0,84.3,86.4,88.4,90.3,92.2,94.1,95.9,97.7,99.5,101.2,102.8,104.5,106.2,107.8,109.5,111.1,112.7,114.1,115.8,117.3,118.8,120.2,121.7,123.2,124.6,126.1,127.5,129.0,130.5,132.0,133.5,135.2,136.9,138.6,140.3,142.0,143.7,145.4,147.1,148.4,149.6,150.9,152.1,152.9,153.6,154.4,155.1,155.5,156.0,156.4,156.8,156.9,157.1,157.2,157.3,157.4,157.5,157.6,157.7,157.8,157.9];
+var FS=[2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.3,3.4,3.5,3.6,3.7,3.8,3.9,4.0,4.1,4.2,4.3,4.4,4.5,4.6,4.6,4.9,4.9,5.0,5.1,5.1,5.2,5.4,5.5,5.6,5.7,5.9,6.0,6.2,6.3,6.5,6.6,6.8,6.8,6.7,6.7,6.7,6.5,6.3,6.1,5.9,5.8,5.7,5.5,5.4,5.4,5.4,5.3,5.3,5.3,5.3,5.2,5.2,5.2,5.2,5.2,5.2,5.2,5.2];
+var sex='m',recs=[];
+function g(id){return document.getElementById(id)}
+function lerp(a,age){var x=Math.max(0,Math.min(68,age*4)),i=Math.floor(x),f=x-i;return i>=68?a[68]:a[i]*(1-f)+a[i+1]*f}
+function hm(s,a){return lerp(s==='m'?HM:FM,a)}function hs(s,a){return lerp(s==='m'?HS:FS,a)}
+function std(s,a,h){
+ if(a<1)return null;
+ if(a<6){if(h<70||h>=120)return null;return s==='m'?0.00206*h*h-0.1166*h+6.5273:0.00249*h*h-0.1858*h+9.0360}
+ if(s==='m'){
+  if(h>=101&&h<140)return 0.0000303882*h*h*h-0.00571495*h*h+0.508124*h-9.17791;
+  if(h>=140&&h<149)return -0.000085013*h*h*h+0.0370692*h*h-4.6558*h+191.847;
+  if(h>=149&&h<184)return -0.000310205*h*h*h+0.151159*h*h-23.6303*h+1231.04;
+ }else{
+  if(h>=101&&h<140)return 0.000127719*h*h*h-0.0414712*h*h+4.8575*h-184.492;
+  if(h>=140&&h<149)return -0.00178766*h*h*h+0.803922*h*h-119.31*h+5885.03;
+  if(h>=149&&h<171)return 0.000956401*h*h*h-0.462755*h*h+75.3058*h-4068.31;
+ }return null}
+function judge(a,p){
+ if(a<6){return p>=30?'太りすぎ':p>=20?'やや太りすぎ':p>=15?'太りぎみ':p>-15?'ふつう':p>-20?'やせ':'やせすぎ'}
+ return p>=50?'高度肥満':p>=30?'中等度肥満':p>=20?'軽度肥満':p>-20?'ふつう':p>-30?'やせ(痩身傾向)':'高度やせ'}
+function ticks(a,b,s){var r=[];for(var v=Math.ceil(a/s)*s;v<=b;v+=s)r.push(v);return r}
+function chart(o){
+ var W=360,H=290,L=38,R=10,T=24,B=30;
+ function X(v){return L+(v-o.x0)/(o.x1-o.x0)*(W-L-R)}function Y(v){return H-B-(v-o.y0)/(o.y1-o.y0)*(H-T-B)}
+ var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+o.label+'">';
+ ticks(o.y0,o.y1,o.ys).forEach(function(v){s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#EBDDC3"/><text x="'+(L-5)+'" y="'+(Y(v)+4)+'" fill="#6B655C" font-size="10" text-anchor="end">'+v+'</text>'});
+ ticks(o.x0,o.x1,o.xs).forEach(function(v){s+='<line y1="'+T+'" y2="'+(H-B)+'" x1="'+X(v)+'" x2="'+X(v)+'" stroke="#F3E8D3"/><text x="'+X(v)+'" y="'+(H-B+14)+'" fill="#6B655C" font-size="10" text-anchor="middle">'+v+'</text>'});
+ s+='<text x="'+(W/2)+'" y="'+(H-3)+'" fill="#6B655C" font-size="10" text-anchor="middle">'+o.xl+'</text><text x="4" y="12" fill="#6B655C" font-size="10">'+o.yl+'</text>';
+ o.lines.forEach(function(l){var d='';l.pts.forEach(function(p,i){if(p[1]<o.y0||p[1]>o.y1)return;d+=(d?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)});s+='<path d="'+d+'" fill="none" stroke="'+l.c+'" stroke-width="'+l.w+'"'+(l.d?' stroke-dasharray="'+l.d+'"':'')+'/>'});
+ if(o.pts.length>1){s+='<path d="'+o.pts.map(function(p,i){return(i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)}).join('')+'" fill="none" stroke="#0E9F92" stroke-width="1.5"/>'}
+ o.pts.forEach(function(p,i){s+='<circle cx="'+X(p[0])+'" cy="'+Y(p[1])+'" r="'+(i==o.pts.length-1?5:3.5)+'" fill="#0E9F92" stroke="#FFFFFF"/>'});
+ return s+'</svg>'}
+var OB='/kids-obesity',TH='/kids-thin';
+function links(j){
+ var o='<a class="lnk %s" href="'+OB+'">肥満について読む</a>',t='<a class="lnk %s" href="'+TH+'">やせ・食が細いことについて読む</a>';
+ if(j===null)return '<p class="small" style="margin:14px 0 0">気になる方の記事を選んでください。</p>'+o.replace('%s','')+t.replace('%s','');
+ if(/太り|肥満/.test(j))return '<p class="small" style="margin:14px 0 0">結果に合わせた記事です。</p>'+o.replace('%s','pri');
+ if(/やせ/.test(j))return '<p class="small" style="margin:14px 0 0">結果に合わせた記事です。</p>'+t.replace('%s','pri');
+ return '<p class="small" style="margin:14px 0 0">標準の範囲です。気になることがあれば、こちらも参考にしてください。</p>'+o.replace('%s','')+t.replace('%s','')}
+function draw(){
+ var last=recs[recs.length-1],inf=last&&last.age<6;
+ var L1=[];[[0,'#EBDDC3',1,0],[-2,'#9A8F7E',1,'3 3'],[-1,'#C7BBA6',1,0],[1,'#C7BBA6',1,0],[2,'#9A8F7E',1,'3 3']].forEach(function(k){var pts=[];for(var i=0;i<=68;i++)pts.push([i/4,hm(sex,i/4)+k[0]*hs(sex,i/4)]);L1.push({pts:pts,c:k[1],w:k[2],d:k[3]})});
+ var ms=[];for(var i=0;i<=68;i++)ms.push([i/4,hm(sex,i/4)]);L1.push({pts:ms,c:'#E8892B',w:2.5});
+ g('c1').innerHTML=chart({label:'身長の成長曲線',x0:0,x1:18,y0:40,y1:190,xs:2,ys:30,xl:'年齢(歳)',yl:'身長(cm)',lines:L1,pts:recs.map(function(r){return[r.age,r.h]})});
+ var x0=inf?70:100,x1=inf?125:185,y0=inf?5:10,y1=inf?35:100;
+ recs.forEach(function(r){if((r.age<6)===!!inf){x1=Math.max(x1,Math.ceil(r.h/5)*5+5);y1=Math.max(y1,Math.ceil(r.w/10)*10+5);x0=Math.min(x0,Math.floor(r.h/5)*5-5)}});
+ var ageRef=inf?3:10,L2=[];
+ [[0,'#E8892B',2.5,0],[20,'#9A8F7E',1,'3 3'],[-20,'#9A8F7E',1,'3 3']].concat(inf?[[15,'#C7BBA6',1,'1 3'],[-15,'#C7BBA6',1,'1 3']]:[]).forEach(function(k){var pts=[];for(var h=x0;h<=x1;h+=0.5){var v=std(sex,ageRef,h);if(v!=null)pts.push([h,v*(1+k[0]/100)])}L2.push({pts:pts,c:k[1],w:k[2],d:k[3]})});
+ g('c2').innerHTML=chart({label:'身長と体重の判定曲線',x0:x0,x1:x1,y0:y0,y1:y1,xs:inf?10:20,ys:inf?5:10,xl:'身長(cm)',yl:'体重(kg)',lines:L2,pts:recs.filter(function(r){return(r.age<6)===!!inf}).map(function(r){return[r.h,r.w]})});
+ var res=g('res');
+ if(!last){res.textContent='年齢・身長・体重を入力してください。'}else{
+  var z=(last.h-hm(sex,last.age))/hs(sex,last.age),sp=std(sex,last.age,last.h),t='';
+  t+='身長 <b>'+last.h+' cm</b>:同性・同年齢の平均より <b>'+(z>=0?'+':'')+z.toFixed(1)+'SD</b>';
+  if(z<=-2)t+=' <span class="tag">-2SD以下</span>';else if(z>=2)t+=' <span class="tag">+2SD以上</span>';
+  t+='<br>';
+  var jd=null;
+  if(sp==null){t+='体重 <b>'+last.w+' kg</b>:この年齢・身長では肥満度の標準体重を計算できません(肥満度は1歳以上、幼児は身長70〜120cm、学童は101cm以上が対象)。'}
+  else{var p=(last.w-sp)/sp*100;jd=judge(last.age,p);t+='体重 <b>'+last.w+' kg</b>:標準体重 '+sp.toFixed(1)+' kg に対して 肥満度 <b>'+(p>=0?'+':'')+p.toFixed(1)+'%</b><span class="tag">'+jd+'</span>'}
+  t+='<p class="small" style="margin:12px 0 0">※1回の測定だけで判断せず、曲線の流れを見ることが大切です。気になる場合は小児科へ。</p>';
+  t+=links(jd);
+  res.innerHTML=t}
+ var tb='<tr><th>年齢</th><th>身長</th><th>体重</th><th></th></tr>';
+ recs.forEach(function(r,i){tb+='<tr><td>'+Math.floor(r.age)+'歳'+Math.round((r.age%1)*12)+'か月</td><td>'+r.h+' cm</td><td>'+r.w+' kg</td><td><button type="button" data-i="'+i+'" style="padding:2px 10px;font-size:12px">削除</button></td></tr>'});
+ g('tb').innerHTML=recs.length?tb:'';
+ g('tb').querySelectorAll('button').forEach(function(b){b.onclick=function(){recs.splice(+b.dataset.i,1);draw()}});
+ try{localStorage.setItem('nutrition_growth_v1',JSON.stringify({sex:sex,recs:recs}))}catch(e){}}
+(function(){var y=g('ay'),m=g('am');for(var i=0;i<=17;i++)y.innerHTML+='<option value="'+i+'">'+i+'</option>';for(i=0;i<12;i++)m.innerHTML+='<option value="'+i+'">'+i+'か月</option>';y.value=5;
+ g('sm').onclick=function(){sex='m';g('sm').className='on';g('sf').className='';draw()};
+ g('sf').onclick=function(){sex='f';g('sf').className='on';g('sm').className='';draw()};
+ g('clr').onclick=function(){recs=[];g('err').textContent='';draw()};
+ g('add').onclick=function(){var yy=+y.value,mm=+m.value,h=parseFloat(g('h').value),w=parseFloat(g('w').value),e=g('err');e.textContent='';
+  if(yy===17)mm=0;
+  if(!(h>=40&&h<=200)){e.textContent='身長は40〜200cmで入力してください。';return}
+  if(!(w>=1&&w<=150)){e.textContent='体重は1〜150kgで入力してください。';return}
+  recs.push({age:yy+mm/12,h:Math.round(h*10)/10,w:Math.round(w*10)/10});recs.sort(function(a,b){return a.age-b.age});draw();g('h').value='';g('w').value=''};
+ try{var sv=JSON.parse(localStorage.getItem('nutrition_growth_v1')||'null');
+  if(sv&&Array.isArray(sv.recs)){recs=sv.recs.filter(function(r){return r&&r.age>=0&&r.age<=17&&r.h>=40&&r.h<=200&&r.w>=1&&r.w<=150}).map(function(r){return{age:+r.age,h:+r.h,w:+r.w}});
+   if(sv.sex==='f'){sex='f';g('sf').className='on';g('sm').className=''}}}catch(e){recs=[]}
+ draw()})();
+</script><section class="related wrap" aria-label="あわせて読みたい"><h2>あわせて読みたい</h2><a href="/kids-obesity"><b>子どもの肥満</b><span>家庭でできる食事と生活の整え方</span></a><a href="/kids-thin"><b>子どものやせ・食が細いとき</b><span>見直したいことと、相談の目安</span></a></section>
+<footer class="sitefoot"><div class="wrap"><nav class="flinks" aria-label="サイト情報"><a href="/about">運営者情報</a><a href="/contact">お問い合わせ</a><a href="/privacy">プライバシーポリシー</a><a href="/disclaimer">免責事項</a></nav><div class="small">&copy; 2026 &amp;NUTRITION. All rights reserved.</div></div></footer>
+</body></html>

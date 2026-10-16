@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>&NUTRITION CLUB(会員制オンラインコミュニティ) | &NUTRITION</title>
+<meta name="description" content="&amp;NUTRITION CLUBは、毎日の食事を迷わず選べるようにする会員制オンラインコミュニティ。月2回のライブQ&amp;A、会員限定コンテンツ、個別フィードバックを提供します。">
+<link rel="canonical" href="https://and-nutrition88.netlify.app/salon">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="&amp;NUTRITION">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="&amp;NUTRITION CLUB(会員制オンラインコミュニティ) | &amp;NUTRITION">
+<meta property="og:description" content="&amp;NUTRITION CLUBは、毎日の食事を迷わず選べるようにする会員制オンラインコミュニティ。月2回のライブQ&amp;A、会員限定コンテンツ、個別フィードバックを提供します。">
+<meta property="og:url" content="https://and-nutrition88.netlify.app/salon">
+<meta property="og:image" content="https://and-nutrition88.netlify.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "&NUTRITION CLUB(会員制オンラインコミュニティ) | &NUTRITION", "description": "&NUTRITION CLUBは、毎日の食事を迷わず選べるようにする会員制オンラインコミュニティ。月2回のライブQ&A、会員限定コンテンツ、個別フィードバックを提供します。", "url": "https://and-nutrition88.netlify.app/salon", "inLanguage": "ja", "publisher": {"@type": "Organization", "name": "&NUTRITION", "url": "https://and-nutrition88.netlify.app/"}}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;1,800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0E1013; --ink:#F4F4F2; --ink-soft:#A8ADB4;
+    --accent:#F2A34C; --line:#272B31;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    color-scheme: dark;
+  }
+  html, body { margin: 0; background: var(--bg); }
+  * { box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; color: var(--ink); line-height: 1.85; overflow-x: hidden; }
+  h1, h2, .brand { font-family: 'Montserrat','Noto Sans JP',sans-serif; font-weight: 800; letter-spacing: -0.01em; }
+  a { color: inherit; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+    position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 5;
+  }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .brand { font-size: 18px; text-decoration: none; }
+  .back { font-size: 14px; font-weight: 700; color: #F2A34C; text-decoration: none; padding: 10px 0 10px 12px; }
+.homebtm { text-align:center; margin:48px 0 64px; }
+.homebtm a { display:inline-block; padding:14px 28px; border:1px solid #F2A34C; color:#F2A34C; font-weight:700; text-decoration:none; border-radius:3px; }
+
+  .hero { padding: 52px 0 36px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-size: 12px; color: var(--accent); letter-spacing: .08em; margin-bottom: 14px; }
+  h1 { font-size: 30px; font-style: italic; font-weight: 900; line-height: 1.35; margin: 0 0 18px; }
+  .hero p { font-size: 15px; color: var(--ink-soft); max-width: 48ch; margin: 0 0 28px; }
+  .btn {
+    display: inline-block; background: var(--accent); color: #0E1013;
+    padding: 14px 28px; border-radius: 2px; text-decoration: none;
+    font-size: 14px; font-weight: 700; letter-spacing: .04em;
+  }
+
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+  section h2 { font-size: 21px; margin: 0 0 24px; border-left: 4px solid var(--accent); padding-left: 12px; }
+
+  .feature-list { display: flex; flex-direction: column; gap: 0; }
+  .feature { display: flex; gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); }
+  .feature:first-child { border-top: none; }
+  .feature .num { font-family: 'Montserrat',sans-serif; font-weight: 800; color: var(--accent); font-size: 14px; width: 28px; flex-shrink: 0; }
+  .feature h3 { font-size: 15px; margin: 0 0 4px; font-weight: 700; }
+  .feature p { font-size: 13px; color: var(--ink-soft); margin: 0; }
+
+  .plans { display: flex; flex-direction: column; gap: 16px; }
+  .plan { border: 1px solid var(--line); padding: 24px; border-radius: 4px; }
+  .plan.featured { border-color: var(--accent); }
+  .plan .name { font-size: 13px; color: var(--accent); letter-spacing: .06em; margin-bottom: 8px; }
+  .plan .price { font-family: 'Montserrat',sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+  .plan .price span { font-size: 13px; color: var(--ink-soft); font-weight: 400; }
+  .plan ul { margin: 16px 0 0; padding-left: 18px; font-size: 13px; color: var(--ink-soft); }
+  .plan li { margin-bottom: 8px; }
+
+  .flow { counter-reset: step; }
+  .step { display: flex; gap: 16px; padding: 16px 0; }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #0E1013;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: 13px;
+  }
+  .step p { margin: 0; font-size: 14px; padding-top: 3px; }
+
+  .cta { text-align: center; padding: 52px 0 64px; }
+  .cta p { font-size: 14px; color: var(--ink-soft); margin: 14px 0 26px; }
+
+  footer { padding: 28px 0 48px; }
+  footer .small { font-size: 12px; color: var(--ink-soft); }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 24px; }
+  }
+.byline{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:var(--ink-soft,var(--soft,#888));margin:14px 0 4px;line-height:1.7}
+.byline a{color:var(--apricot,var(--acc,#F2A34C));text-decoration:none;font-weight:700}
+.related{margin:48px auto 8px}
+.related h2{font-size:16px;margin:0 0 12px}
+.related a{display:block;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;text-decoration:none;color:inherit}
+.related a b{display:block;font-size:15px;line-height:1.6}
+.related a span{display:block;font-size:12px;color:var(--ink-soft,var(--soft,#888));line-height:1.6}
+@media (hover:hover){.related a:hover{border-color:var(--apricot,var(--acc,#F2A34C))}}
+.flinks{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;margin:0 0 12px}
+.flinks a{color:inherit;text-decoration:none;opacity:.8}
+.sitefoot{border-top:1px solid var(--line);margin-top:40px;padding:20px 0 40px}
+.sitefoot .wrap{padding-top:0}
+.sitefoot .small{font-size:12px;color:var(--ink-soft,var(--soft,#888))}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="/">&amp;NUTRITION</a>
+    <a class="back" href="/">← ホームへ</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">MEMBERS ONLY COMMUNITY</div>
+    <h1>&NUTRITION CLUB<br>毎日の食事を、迷わず選べるように。</h1>
+    <p>会員制のオンラインコミュニティです。記事だけでは伝えきれない実践的な内容を、コミュニティと個別のやり取りを通じて届けます。</p>
+    <a class="btn" href="#plans">プランを見る</a>
+  </div>
+
+  <section>
+    <h2>&amp;NUTRITION CLUBでできること</h2>
+    <div class="feature-list">
+      <div class="feature">
+        <div class="num">01</div>
+        <div><h3>月2回のライブQ&A</h3><p>YASUNORIに直接質問できるオンライン配信。過去回はアーカイブでいつでも視聴できます。</p></div>
+      </div>
+      <div class="feature">
+        <div class="num">02</div>
+        <div><h3>会員限定コンテンツ</h3><p>一般記事には出さない、より専門的な解説や実践レシピを配信します。</p></div>
+      </div>
+      <div class="feature">
+        <div class="num">03</div>
+        <div><h3>個別フィードバック</h3><p>普段の食事内容について、管理栄養士から個別にアドバイスを受けられます。</p></div>
+      </div>
+      <div class="feature">
+        <div class="num">04</div>
+        <div><h3>会員コミュニティ</h3><p>同じ目的を持つメンバー同士で情報交換できる専用の場を用意しています。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="plans">
+    <h2>料金プラン</h2>
+    <div class="plans">
+      <div class="plan">
+        <div class="name">FREE</div>
+        <div class="price">¥0<span> / 月</span></div>
+        <ul>
+          <li>会員コミュニティへの参加(閲覧のみ)</li>
+          <li>ライブQ&Aのアーカイブ視聴(一部)</li>
+          <li>会員限定の週刊ニュースレター</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <div class="name">BASIC</div>
+        <div class="price">¥1,980<span> / 月</span></div>
+        <ul>
+          <li>会員限定コンテンツの閲覧</li>
+          <li>ライブQ&Aへの参加・アーカイブ視聴</li>
+          <li>会員コミュニティへの参加</li>
+        </ul>
+      </div>
+      <div class="plan featured">
+        <div class="name">PREMIUM</div>
+        <div class="price">¥4,980<span> / 月</span></div>
+        <ul>
+          <li>BASICの内容すべて</li>
+          <li>月1回の個別フィードバック(食事内容の相談)</li>
+          <li>質問の優先回答</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>参加の流れ</h2>
+    <div class="flow">
+      <div class="step"><p>下の「参加する」ボタンから申し込みフォームに進みます。</p></div>
+      <div class="step"><p>プランを選択し、必要事項を入力します。</p></div>
+      <div class="step"><p>登録完了後、コミュニティへの招待リンクをお送りします。</p></div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2 style="border:none; padding:0; font-size:22px;">まずは気軽に参加してみませんか</h2>
+    <p>いつでも解約できます。まずは1か月、試してみてください。</p>
+    <a class="btn" href="#">参加する</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <nav class="flinks" aria-label="サイト情報"><a href="/about">運営者情報</a><a href="/contact">お問い合わせ</a><a href="/privacy">プライバシーポリシー</a><a href="/disclaimer">免責事項</a></nav>
+    <div class="small">&copy; 2026 &amp;NUTRITION. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="wrap homebtm"><a href="/">&larr; ホームへ戻る</a></div>
+</body>
+</html>

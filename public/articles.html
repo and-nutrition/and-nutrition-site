@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>記事一覧 | &amp;NUTRITION</title>
+<meta name="description" content="&amp;NUTRITIONの記事一覧。小児(成長曲線・肥満・やせ)と成人(タンパク質・発酵食品・献立)の記事を、対象で絞り込んで読めます。">
+<link rel="canonical" href="https://and-nutrition88.netlify.app/articles">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="&amp;NUTRITION">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="記事一覧 | &amp;NUTRITION">
+<meta property="og:description" content="&amp;NUTRITIONの記事一覧。小児(成長曲線・肥満・やせ)と成人(タンパク質・発酵食品・献立)の記事を、対象で絞り込んで読めます。">
+<meta property="og:url" content="https://and-nutrition88.netlify.app/articles">
+<meta property="og:image" content="https://and-nutrition88.netlify.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "記事一覧 | &NUTRITION", "description": "&NUTRITIONの記事一覧。小児(成長曲線・肥満・やせ)と成人(タンパク質・発酵食品・献立)の記事を、対象で絞り込んで読めます。", "url": "https://and-nutrition88.netlify.app/articles", "inLanguage": "ja", "publisher": {"@type": "Organization", "name": "&NUTRITION", "url": "https://and-nutrition88.netlify.app/"}}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;1,800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F2EA;
+    --ink: #26301F;
+    --ink-soft: #56604A;
+    --green: #3E5C3A;
+    --green-deep: #2A4227;
+    --apricot: #D98C5F;
+    --line: #DAD2C0;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1B2018;
+      --ink: #EDE8DB;
+      --ink-soft: #B7BBA9;
+      --green: #8CB187;
+      --green-deep: #A9CBA3;
+      --apricot: #E3A377;
+      --line: #3A4235;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1B2018;
+    --ink: #EDE8DB;
+    --ink-soft: #B7BBA9;
+    --green: #8CB187;
+    --green-deep: #A9CBA3;
+    --apricot: #E3A377;
+    --line: #3A4235;
+  }
+  html, body { margin: 0; background: var(--bg); }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--ink);
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .brand { font-family: 'Shippori Mincho', serif; }
+  a { color: inherit; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+  header {
+    aspect-ratio: 1100 / 619;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    background-color: #0a0a0a;
+    background: none;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) header {
+      background:
+        none;
+      background-color: #0a0a0a;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+  header .wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    position: absolute; top: env(safe-area-inset-top, 0px); left: 0; right: 0;
+    padding: 16px 28px;
+  }
+  .brand { display: flex; align-items: center; }
+  .brand img { height: 40px; width: auto; display: block; filter: invert(1) brightness(2); }
+  .subnav {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+  }
+  .subnav .wrap { display: flex; justify-content: flex-end; padding: 14px 28px; }
+  nav { display: flex; gap: 24px; font-size: 14px; color: var(--ink-soft); }
+  nav a { text-decoration: none; color: var(--ink-soft); }
+
+  .hero {
+    padding: 76px 0 60px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero .eyebrow { font-size: 13px; color: var(--green); margin-bottom: 14px; }
+  .hero h1 {
+    font-size: 40px; font-weight: 700; margin: 0 0 20px;
+    max-width: 13ch; line-height: 1.35; color: var(--ink);
+  }
+  .hero p { font-size: 16px; color: var(--ink-soft); max-width: 46ch; margin: 0 0 28px; }
+  .btn {
+    display: inline-block; background: var(--green); color: #F6F2EA;
+    padding: 13px 26px; border-radius: 4px; text-decoration: none;
+    font-size: 14px; font-weight: 500;
+  }
+  
+
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section h2 { font-size: 24px; margin: 0 0 8px; }
+  section .lead { color: var(--ink-soft); font-size: 15px; margin: 0 0 32px; max-width: 50ch; }
+
+  .posts { display: flex; flex-direction: column; gap: 0; }
+  .post {
+    display: flex; gap: 20px; padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .post:first-child { border-top: none; }
+  .post .tag {
+    font-size: 12px; color: var(--apricot); width: 90px; flex-shrink: 0; padding-top: 3px;
+  }
+  .post h3 { font-size: 17px; margin: 0 0 6px; font-weight: 500; font-family: 'Noto Sans JP', sans-serif; }
+  .post p { margin: 0; font-size: 14px; color: var(--ink-soft); max-width: 56ch; }
+
+  .about { display: flex; gap: 40px; flex-wrap: wrap; }
+  .about .stat { flex: 1; min-width: 140px; }
+  .about .stat .num { font-family: 'Shippori Mincho', serif; font-size: 30px; color: var(--green); }
+  .about .stat .label { font-size: 13px; color: var(--ink-soft); margin-top: 4px; }
+  .about p.lede { font-size: 15px; max-width: 54ch; margin: 0 0 32px; color: var(--ink); }
+
+  .signup { text-align: left; }
+  .signup form { display: flex; gap: 10px; max-width: 420px; flex-wrap: wrap; margin-top: 20px; }
+  .signup input[type=email] {
+    flex: 1; min-width: 180px; padding: 12px 14px; border: 1px solid var(--line);
+    border-radius: 4px; background: var(--bg); color: var(--ink); font-size: 14px;
+  }
+  .signup .msg { font-size: 13px; margin-top: 12px; color: var(--green); display: none; }
+
+  footer { padding: 32px 0 48px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer .small { font-size: 12px; color: var(--ink-soft); }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 30px; }
+    nav { gap: 14px; }
+    .post { flex-direction: column; gap: 6px; }
+    .post .tag { width: auto; }
+  }
+</style>
+<style id="brand-theme">
+/* Dark sporty theme matched to the REBORN header */
+:root, :root:not([data-theme="light"]), :root[data-theme="dark"] {
+  --bg:#0E1013; --ink:#F4F4F2; --ink-soft:#A8ADB4;
+  --green:#F2A34C; --green-deep:#F2A34C; --apricot:#F2A34C; --line:#272B31;
+  color-scheme: dark;
+}
+html, body { background: var(--bg); color: var(--ink); }
+h1, h2, h3, .brand, .stat .num {
+  font-family: 'Montserrat','Noto Sans JP',sans-serif;
+  font-weight: 800; letter-spacing: -0.01em;
+}
+.hero h1 { font-style: italic; font-weight: 900; max-width: none; line-height: 1.3; }
+.post h3 { font-weight: 700; }
+section h2, .block h2, .tips h2, .day h2, .contact h2 {
+  border-left: 4px solid var(--green); padding-left: 12px;
+}
+.btn { background: var(--green); color: #0E1013; font-weight: 700; border-radius: 2px; letter-spacing: .04em; }
+.subnav nav a { color: var(--ink); font-weight: 700; letter-spacing: .06em; }
+.signup input[type=email] { background: #171A1F; color: var(--ink); }
+.avatar { background: var(--green); color: #0E1013; }
+
+/* Audience filter */
+.filters { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 24px; }
+.filters button {
+  font-family:inherit; font-size:13px; font-weight:700; letter-spacing:.06em;
+  padding:8px 18px; border-radius:999px; cursor:pointer;
+  background:transparent; color:var(--ink); border:1px solid var(--line);
+}
+.filters button[aria-pressed="true"] { background:var(--green); color:#0E1013; border-color:var(--green); }
+.post .aud {
+  display:inline-block; margin-top:6px; font-size:11px; font-weight:700; letter-spacing:.06em;
+  padding:1px 8px; border-radius:999px; border:1px solid var(--line); color:var(--ink-soft);
+}
+.empty-msg { display:none; padding:28px 0; color:var(--ink-soft); font-size:14px; border-top:1px solid var(--line); }
+
+/* Child cards: brighter look */
+.post[data-audience="child"]{background:#FFF4E2;color:#2B2A28;border-radius:10px;padding:20px 20px;margin:6px 0;border-top:none}
+.post[data-audience="child"] h3 a{color:#2B2A28}
+.post[data-audience="child"] p{color:#6B655C}
+.post[data-audience="child"] .tag{color:#C9680F}
+.post[data-audience="child"] .aud{border-color:#E3C89D;color:#8A6A3A}
+</style>
+<style>
+header{aspect-ratio:auto !important;background:var(--bg) !important;position:sticky !important;top:env(safe-area-inset-top,0px)}
+header .wrap{position:static !important;padding:16px 28px !important}
+header .brand{font-size:20px;font-weight:700;text-decoration:none}
+header .back{font-size:14px;font-weight:700;text-decoration:none;color:var(--apricot,#F2A34C)}
+.byline{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:var(--ink-soft,var(--soft,#888));margin:14px 0 4px;line-height:1.7}
+.byline a{color:var(--apricot,var(--acc,#F2A34C));text-decoration:none;font-weight:700}
+.related{margin:48px auto 8px}
+.related h2{font-size:16px;margin:0 0 12px}
+.related a{display:block;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;text-decoration:none;color:inherit}
+.related a b{display:block;font-size:15px;line-height:1.6}
+.related a span{display:block;font-size:12px;color:var(--ink-soft,var(--soft,#888));line-height:1.6}
+@media (hover:hover){.related a:hover{border-color:var(--apricot,var(--acc,#F2A34C))}}
+.flinks{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;margin:0 0 12px}
+.flinks a{color:inherit;text-decoration:none;opacity:.8}
+.sitefoot{border-top:1px solid var(--line);margin-top:40px;padding:20px 0 40px}
+.sitefoot .wrap{padding-top:0}
+.sitefoot .small{font-size:12px;color:var(--ink-soft,var(--soft,#888))}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="/">&amp;NUTRITION</a>
+    <a class="back" href="/">&larr; ホームへ</a>
+  </div>
+</header>
+
+<section id="articles">
+  <div class="wrap">
+    <h2>記事一覧</h2>
+    <p class="lead">管理栄養士監修の記事を中心に、週2本のペースで更新しています。</p>
+    <div class="filters" role="group" aria-label="対象で絞り込む">
+      <button type="button" data-filter="all" aria-pressed="true">すべて</button>
+      <button type="button" data-filter="child" aria-pressed="false">小児</button>
+      <button type="button" data-filter="adult" aria-pressed="false">成人</button>
+    </div>
+    <div class="posts">
+      <div class="post" data-audience="child">
+        <div class="tag">ツール<br><span class="aud">小児</span></div>
+        <div>
+          <h3><a href="/growth" style="text-decoration:none;">成長曲線プロット:身長・体重を入れて、標準との位置を確かめる</a></h3>
+          <p>年齢・身長・体重を入力すると、成長曲線と肥満度がわかります。測定を重ねて曲線の流れも確認できます。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="child">
+        <div class="tag">ゲーム<br><span class="aud">小児</span></div>
+        <div>
+          <h3><a href="/game" style="text-decoration:none;">こんだてバランスゲーム:料理をお皿にのせて100点を目指そう</a></h3>
+          <p>主食・主菜・副菜・おまけをそろえて、バランスを楽しく学べます。お子さんと一緒にどうぞ。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="child">
+        <div class="tag">小児・肥満<br><span class="aud">小児</span></div>
+        <div>
+          <h3><a href="/kids-obesity" style="text-decoration:none;">子どもの肥満、家庭でできる食事と生活の整え方</a></h3>
+          <p>減らすより整える。成長期に合った見直しのポイントと受診の目安。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="child">
+        <div class="tag">小児・やせ<br><span class="aud">小児</span></div>
+        <div>
+          <h3><a href="/kids-thin" style="text-decoration:none;">子どものやせ・食が細いときに見直したいこと</a></h3>
+          <p>成長曲線の見方と、補食や食卓の工夫、相談のタイミング。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="adult">
+        <div class="tag">運動と栄養<br><span class="aud">成人</span></div>
+        <div>
+          <h3><a href="/protein-timing" style="text-decoration:none;">筋トレ後のたんぱく質は、いつ摂る?「ゴールデンタイム」の最新エビデンス</a></h3>
+          <p>「30分以内」は本当に必要?最新の研究からわかる、タイミングと量の考え方。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="adult">
+        <div class="tag">病気別<br><span class="aud">成人</span></div>
+        <div>
+          <h3><a href="/hypertension" style="text-decoration:none;">高血圧の食事療法:減塩を中心に、食べ方を整える</a></h3>
+          <p>血圧が高めと言われたときに、まず見直したい食事のポイント。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="adult">
+        <div class="tag">病気別<br><span class="aud">成人</span></div>
+        <div>
+          <h3><a href="/diabetes" style="text-decoration:none;">糖尿病の食事療法:「食べてはいけないもの」はない</a></h3>
+          <p>エネルギー量、バランス、食べ方。基本の考え方をわかりやすく。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="adult">
+        <div class="tag">病気別<br><span class="aud">成人</span></div>
+        <div>
+          <h3><a href="/dyslipidemia" style="text-decoration:none;">脂質異常症の食事療法:脂の「量」と「質」を整える</a></h3>
+          <p>コレステロールや中性脂肪が高いと言われたら、まず見直したいこと。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="adult">
+        <div class="tag">病気別<br><span class="aud">成人</span></div>
+        <div>
+          <h3><a href="/gout" style="text-decoration:none;">高尿酸血症・痛風の食事療法:プリン体だけでなく、生活全体を整える</a></h3>
+          <p>尿酸値が高いと言われたら。食事と生活で気をつけたいこと。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="adult">
+        <div class="tag">基礎知識<br><span class="aud">成人</span></div>
+        <div>
+          <h3><a href="/protein" style="text-decoration:none;">タンパク質は摂りすぎても意味がない?体重別の適量を解説</a></h3>
+          <p>「多いほど良い」は本当か。体重や運動量から逆算する、無理のない目安量。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="adult">
+        <div class="tag">研究紹介<br><span class="aud">成人</span></div>
+        <div>
+          <h3><a href="/fermented" style="text-decoration:none;">発酵食品と腸内環境、最新メタ分析からわかったこと</a></h3>
+          <p>2025年に発表された大規模研究をもとに、腸活食品の効果を整理しました。</p>
+        </div>
+      </div>
+      <div class="post" data-audience="adult">
+        <div class="tag">実践<br><span class="aud">成人</span></div>
+        <div>
+          <h3><a href="/convenience" style="text-decoration:none;">コンビニだけで整える、一週間の栄養バランス献立</a></h3>
+          <p>忙しい平日でも続けられる、買い方と組み合わせの具体例。</p>
+        </div>
+      </div>
+      <div class="empty-msg" id="emptyMsg">このカテゴリの記事は準備中です。</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="font-size:15px;">&NUTRITION</div>
+    <nav class="flinks" aria-label="サイト情報"><a href="/about">運営者情報</a><a href="/contact">お問い合わせ</a><a href="/privacy">プライバシーポリシー</a><a href="/disclaimer">免責事項</a></nav>
+    <div class="small">&copy; 2026 &NUTRITION. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var btns = document.querySelectorAll('.filters button');
+    var posts = document.querySelectorAll('.post');
+    var empty = document.getElementById('emptyMsg');
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){
+        var f = b.getAttribute('data-filter');
+        btns.forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        var shown = 0;
+        posts.forEach(function(p){
+          var ok = f === 'all' || (p.getAttribute('data-audience') || '').split(' ').indexOf(f) > -1;
+          p.style.display = ok ? '' : 'none';
+          if (ok) shown++;
+        });
+        empty.style.display = shown ? 'none' : 'block';
+      });
+    });
+  })();
+  (function(){var h=(location.hash||'').replace('#','');var b=document.querySelector('.filters button[data-filter="'+h+'"]');if(b)b.click();})();
+</script>
+
+</body>
+</html>
