@@ -3,160 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="dark">
   <title>お問い合わせ | &amp;NUTRITION</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont,
-        "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 32px 20px 48px;
-      line-height: 1.7;
-      color: #222;
-      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Segoe UI", sans-serif;
+      background: #121214; color: #f0f0f0; line-height: 1.7; padding: 20px;
     }
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 600px; margin: 0 auto 30px; padding-bottom: 15px; border-bottom: 1px solid #2a2a2d;
+    }
+    .header-title { font-weight: bold; font-size: 1.2rem; letter-spacing: 1px; }
+    .header-back { color: #a0a0a0; text-decoration: none; font-size: .9rem; }
+    .container { max-width: 600px; margin: 0 auto; }
+    .category-title { color: #e08b35; font-size: .85rem; font-weight: bold; margin-bottom: 8px; }
+    .page-title { font-size: 1.8rem; font-weight: bold; margin-bottom: 12px; color: #fff; }
+    .page-desc { color: #a0a0a0; font-size: .95rem; margin-bottom: 25px; }
 
-    h1 {
-      text-align: center;
-      font-size: 1.7rem;
-      margin: 0 0 12px;
+    .form-group { margin-bottom: 22px; }
+    .form-label { display: block; font-size: .95rem; margin-bottom: 8px; color: #e0e0e0; }
+    .badge-optional { color: #999; font-size: .8rem; margin-left: 6px; }
+    .badge-required { color: #e08b35; font-size: .8rem; margin-left: 6px; }
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%; background: #1a1a1e; border: 1px solid #333338; border-radius: 8px;
+      padding: 12px 14px; color: #fff; font: inherit; font-size: 1rem; outline: none;
+      transition: border-color .2s;
     }
+    input:focus, select:focus, textarea:focus { border-color: #e08b35; }
+    select {
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;
+    }
+    textarea { resize: vertical; min-height: 140px; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
-    .intro {
-      text-align: center;
-      color: #555;
-      margin-bottom: 28px;
+    .submit-btn {
+      width: 100%; background: #fff; color: #121214; border: 0; border-radius: 8px;
+      padding: 14px; font: inherit; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px;
     }
+    .submit-btn:disabled { opacity: .55; cursor: wait; }
+    .submit-btn:focus-visible { outline: 2px solid #e08b35; outline-offset: 3px; }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+    .notice { display: none; border-left: 4px solid #e08b35; padding: 4px 0 4px 16px; margin-bottom: 25px; }
+    .notice.show { display: block; }
+    .notice h2 { font-size: 1.15rem; margin-bottom: 6px; color: #fff; }
+    .notice p { color: #cfcfcf; font-size: .95rem; }
+    .notice.error { border-left-color: #e5534b; }
+    .notice a { color: #fff; }
 
-    label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: 600;
+    .footer-links {
+      margin-top: 40px; padding-top: 20px; border-top: 1px solid #2a2a2d;
+      display: flex; flex-wrap: wrap; gap: 15px; font-size: .85rem;
     }
-
-    input,
-    textarea {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #bbb;
-      border-radius: 6px;
-      font: inherit;
-      background: #fff;
-      color: #222;
-    }
-
-    input:focus,
-    textarea:focus {
-      outline: 2px solid #555;
-      outline-offset: 2px;
-    }
-
-    textarea {
-      resize: vertical;
-    }
-
-    button {
-      width: 100%;
-      padding: 13px 20px;
-      border: 0;
-      border-radius: 6px;
-      background: #222;
-      color: #fff;
-      font: inherit;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #444;
-    }
-
-    .required {
-      color: #a32121;
-      font-size: 0.9em;
-    }
-
-    .back {
-      text-align: center;
-      margin-top: 24px;
-    }
-
-    .back a {
-      color: inherit;
-    }
+    .footer-links a { color: #888; text-decoration: none; }
+    .copyright { margin-top: 20px; font-size: .8rem; color: #666; }
   </style>
 </head>
-
 <body>
-  <main>
-    <h1>お問い合わせ</h1>
 
-    <p class="intro">
-      ご質問・ご相談はこちらからお送りください。
-    </p>
+  <header class="header">
+    <div class="header-title">&amp;NUTRITION</div>
+    <a href="/" class="header-back">&larr; ホームへ</a>
+  </header>
 
-    <!-- JSを使わず直接Formspreeへ送信 -->
-    <form action="https://formspree.io/f/xyeklpng" method="POST">
+  <main class="container">
+    <div class="category-title">お問い合わせ</div>
+    <h1 class="page-title">お問い合わせ</h1>
+    <p class="page-desc">記事の内容、誤りのご指摘、ご相談などを受け付けています。</p>
+
+    <!-- 送信結果（成功・失敗）はここに表示されます -->
+    <div id="notice" class="notice" role="status" aria-live="polite" tabindex="-1"></div>
+
+    <form id="contact-form" action="https://formspree.io/f/xyeklpng" method="POST">
+
       <div class="form-group">
-        <label for="name">
-          お名前 <span class="required">（必須）</span>
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          autocomplete="name"
-          required
-          placeholder="山田 太郎"
-        >
+        <label for="name" class="form-label">お名前 <span class="badge-optional">任意</span></label>
+        <input type="text" id="name" name="name" autocomplete="name" placeholder="お名前を入力">
       </div>
 
       <div class="form-group">
-        <label for="email">
-          メールアドレス <span class="required">（必須）</span>
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          autocomplete="email"
-          required
-          placeholder="example@example.com"
-        >
+        <label for="email" class="form-label">メールアドレス <span class="badge-required">必須</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" required placeholder="example@example.com">
       </div>
 
       <div class="form-group">
-        <label for="message">
-          お問い合わせ内容 <span class="required">（必須）</span>
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows="6"
-          required
-          placeholder="お問い合わせ内容をご記入ください"
-        ></textarea>
+        <label for="type" class="form-label">お問い合わせの種類</label>
+        <select id="type" name="type">
+          <option value="記事の内容について">記事の内容について</option>
+          <option value="誤りのご指摘">誤りのご指摘</option>
+          <option value="ご相談・ご質問">ご相談・ご質問</option>
+          <option value="その他">その他</option>
+        </select>
       </div>
 
-      <button type="submit">
-        送信する
-      </button>
+      <div class="form-group">
+        <label for="message" class="form-label">お問い合わせ内容 <span class="badge-required">必須</span></label>
+        <textarea id="message" name="message" required placeholder="お問い合わせ内容をご記入ください"></textarea>
+      </div>
+
+      <!-- スパム対策（人間には見えない欄） -->
+      <div class="hp" aria-hidden="true">
+        <label>この欄は空のままにしてください<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <button type="submit" id="submit-btn" class="submit-btn">送信する</button>
     </form>
 
-    <p class="back">
-      <a href="/">トップページへ戻る</a>
-    </p>
+    <div class="footer-links">
+      <a href="/運営者情報">運営者情報</a>
+      <a href="/contact">お問い合わせ</a>
+      <a href="/プライバシーポリシー">プライバシーポリシー</a>
+      <a href="/免責事項">免責事項</a>
+    </div>
+    <div class="copyright">&copy; 2026 &amp;NUTRITION. All rights reserved.</div>
   </main>
+
+  <script>
+    (function () {
+      var form = document.getElementById('contact-form');
+      var btn = document.getElementById('submit-btn');
+      var notice = document.getElementById('notice');
+
+      function show(kind, title, body) {
+        notice.className = 'notice show' + (kind === 'error' ? ' error' : '');
+        notice.innerHTML = '<h2></h2><p></p>';
+        notice.querySelector('h2').textContent = title;
+        notice.querySelector('p').textContent = body;
+        notice.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        notice.focus({ preventScroll: true });
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = '送信中…';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(function (res) {
+          if (res.ok) {
+            form.reset();
+            form.style.display = 'none';
+            show('ok', '送信を受け付けました',
+              'お問い合わせありがとうございます。内容を確認し、必要な場合はご入力いただいたメールアドレスにお返事します。');
+          } else {
+            return res.json().catch(function () { return {}; }).then(function (data) {
+              var msg = (data.errors && data.errors.map(function (x) { return x.message; }).join(' / ')) || '';
+              throw new Error(msg || ('status ' + res.status));
+            });
+          }
+        })
+        .catch(function () {
+          show('error', '送信できませんでした',
+            '通信状況をご確認のうえ、もう一度お試しください。入力内容はそのまま残っています。');
+        })
+        .then(function () {
+          btn.disabled = false;
+          btn.textContent = '送信する';
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
