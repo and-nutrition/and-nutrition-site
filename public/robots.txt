@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://and-nutrition88.netlify.app/sitemap.xml
+Sitemap: https://and-nutrition.com/sitemap.xml
