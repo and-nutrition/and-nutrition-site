@@ -1,174 +1,115 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="dark">
-  <title>お問い合わせ | &amp;NUTRITION</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Segoe UI", sans-serif;
-      background: #121214; color: #f0f0f0; line-height: 1.7; padding: 20px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>お問い合わせ | &amp;NUTRITION</title>
+<meta name="description" content="&amp;NUTRITIONへのお問い合わせフォームです。記事の内容、誤りのご指摘、取材・協業のご相談などを受け付けています。">
+<link rel="canonical" href="https://and-nutrition88.netlify.app/contact">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="&amp;NUTRITION">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="お問い合わせ | &amp;NUTRITION">
+<meta property="og:description" content="&amp;NUTRITIONへのお問い合わせフォームです。記事の内容、誤りのご指摘、取材・協業のご相談などを受け付けています。">
+<meta property="og:url" content="https://and-nutrition88.netlify.app/contact">
+<meta property="og:image" content="https://and-nutrition88.netlify.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "headline": "お問い合わせ | &NUTRITION", "name": "お問い合わせ | &NUTRITION", "description": "&NUTRITIONへのお問い合わせフォームです。記事の内容、誤りのご指摘、取材・協業のご相談などを受け付けています。", "url": "https://and-nutrition88.netlify.app/contact", "inLanguage": "ja", "publisher": {"@type": "Organization", "name": "&NUTRITION", "url": "https://and-nutrition88.netlify.app/"}, "mainEntityOfPage": "https://and-nutrition88.netlify.app/contact", "image": "https://and-nutrition88.netlify.app/og.png"}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;1,800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F2EA; --ink: #26301F; --ink-soft: #56604A;
+    --green: #3E5C3A; --apricot: #D98C5F; --line: #DAD2C0;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1B2018; --ink: #EDE8DB; --ink-soft: #B7BBA9;
+      --green: #8CB187; --apricot: #E3A377; --line: #3A4235;
     }
-    .header {
-      display: flex; justify-content: space-between; align-items: center;
-      max-width: 600px; margin: 0 auto 30px; padding-bottom: 15px; border-bottom: 1px solid #2a2a2d;
-    }
-    .header-title { font-weight: bold; font-size: 1.2rem; letter-spacing: 1px; }
-    .header-back { color: #a0a0a0; text-decoration: none; font-size: .9rem; }
-    .container { max-width: 600px; margin: 0 auto; }
-    .category-title { color: #e08b35; font-size: .85rem; font-weight: bold; margin-bottom: 8px; }
-    .page-title { font-size: 1.8rem; font-weight: bold; margin-bottom: 12px; color: #fff; }
-    .page-desc { color: #a0a0a0; font-size: .95rem; margin-bottom: 25px; }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1B2018; --ink: #EDE8DB; --ink-soft: #B7BBA9;
+    --green: #8CB187; --apricot: #E3A377; --line: #3A4235;
+  }
+  html, body { margin: 0; background: var(--bg); }
+  * { box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; color: var(--ink); line-height: 1.85; overflow-x: hidden; }
+  h1, h2, .brand { font-family: 'Shippori Mincho', serif; }
+  a { color: inherit; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
 
-    .form-group { margin-bottom: 22px; }
-    .form-label { display: block; font-size: .95rem; margin-bottom: 8px; color: #e0e0e0; }
-    .badge-optional { color: #999; font-size: .8rem; margin-left: 6px; }
-    .badge-required { color: #e08b35; font-size: .8rem; margin-left: 6px; }
-    input[type="text"], input[type="email"], select, textarea {
-      width: 100%; background: #1a1a1e; border: 1px solid #333338; border-radius: 8px;
-      padding: 12px 14px; color: #fff; font: inherit; font-size: 1rem; outline: none;
-      transition: border-color .2s;
-    }
-    input:focus, select:focus, textarea:focus { border-color: #e08b35; }
-    select {
-      appearance: none; -webkit-appearance: none;
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-      background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;
-    }
-    textarea { resize: vertical; min-height: 140px; }
-    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  header {
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+    position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 5;
+  }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .brand { font-size: 18px; font-weight: 700; text-decoration: none; }
+  .back { font-size: 13px; color: var(--ink-soft); text-decoration: none; }
 
-    .submit-btn {
-      width: 100%; background: #fff; color: #121214; border: 0; border-radius: 8px;
-      padding: 14px; font: inherit; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px;
-    }
-    .submit-btn:disabled { opacity: .55; cursor: wait; }
-    .submit-btn:focus-visible { outline: 2px solid #e08b35; outline-offset: 3px; }
+  .article-head { padding: 48px 0 28px; border-bottom: 1px solid var(--line); }
+  .tag { font-size: 12px; color: var(--apricot); margin-bottom: 14px; }
+  h1 { font-size: 25px; line-height: 1.55; margin: 0 0 14px; max-width: 20ch; }
+  .meta { font-size: 13px; color: var(--ink-soft); }
 
-    .notice { display: none; border-left: 4px solid #e08b35; padding: 4px 0 4px 16px; margin-bottom: 25px; }
-    .notice.show { display: block; }
-    .notice h2 { font-size: 1.15rem; margin-bottom: 6px; color: #fff; }
-    .notice p { color: #cfcfcf; font-size: .95rem; }
-    .notice.error { border-left-color: #e5534b; }
-    .notice a { color: #fff; }
+  p.lede { font-size: 15px; color: var(--ink-soft); padding: 28px 0 8px; max-width: 52ch; }
 
-    .footer-links {
-      margin-top: 40px; padding-top: 20px; border-top: 1px solid #2a2a2d;
-      display: flex; flex-wrap: wrap; gap: 15px; font-size: .85rem;
-    }
-    .footer-links a { color: #888; text-decoration: none; }
-    .copyright { margin-top: 20px; font-size: .8rem; color: #666; }
-  </style>
-</head>
-<body>
+  section.block { padding: 26px 0; border-top: 1px solid var(--line); }
+  section.block h2 { font-size: 18px; margin: 0 0 12px; }
+  section.block p { font-size: 15px; margin: 0 0 12px; max-width: 56ch; }
 
-  <header class="header">
-    <div class="header-title">&amp;NUTRITION</div>
-    <a href="/" class="header-back">&larr; ホームへ</a>
-  </header>
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+  th { color: var(--ink-soft); font-weight: 500; }
+  .tbl-wrap { overflow-x: auto; }
 
-  <main class="container">
-    <div class="category-title">お問い合わせ</div>
-    <h1 class="page-title">お問い合わせ</h1>
-    <p class="page-desc">記事の内容、誤りのご指摘、ご相談などを受け付けています。</p>
+  .tips { padding: 30px 0; }
+  .tips h2 { font-size: 18px; margin: 0 0 14px; }
+  .tips ul { margin: 0; padding-left: 20px; font-size: 14px; color: var(--ink-soft); }
+  .tips li { margin-bottom: 10px; }
 
-    <!-- 送信結果（成功・失敗）はここに表示されます -->
-    <div id="notice" class="notice" role="status" aria-live="polite" tabindex="-1"></div>
+  footer { padding: 32px 0 48px; border-top: 1px solid var(--line); }
+  footer .small { font-size: 12px; color: var(--ink-soft); }
 
-    <form id="contact-form" action="https://formspree.io/f/xyeklpng" method="POST">
-
-      <div class="form-group">
-        <label for="name" class="form-label">お名前 <span class="badge-optional">任意</span></label>
-        <input type="text" id="name" name="name" autocomplete="name" placeholder="お名前を入力">
-      </div>
-
-      <div class="form-group">
-        <label for="email" class="form-label">メールアドレス <span class="badge-required">必須</span></label>
-        <input type="email" id="email" name="email" autocomplete="email" required placeholder="example@example.com">
-      </div>
-
-      <div class="form-group">
-        <label for="type" class="form-label">お問い合わせの種類</label>
-        <select id="type" name="type">
-          <option value="記事の内容について">記事の内容について</option>
-          <option value="誤りのご指摘">誤りのご指摘</option>
-          <option value="ご相談・ご質問">ご相談・ご質問</option>
-          <option value="その他">その他</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="message" class="form-label">お問い合わせ内容 <span class="badge-required">必須</span></label>
-        <textarea id="message" name="message" required placeholder="お問い合わせ内容をご記入ください"></textarea>
-      </div>
-
-      <!-- スパム対策（人間には見えない欄） -->
-      <div class="hp" aria-hidden="true">
-        <label>この欄は空のままにしてください<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
-      </div>
-
-      <button type="submit" id="submit-btn" class="submit-btn">送信する</button>
-    </form>
-
-    <div class="footer-links">
-      <a href="/運営者情報">運営者情報</a>
-      <a href="/contact">お問い合わせ</a>
-      <a href="/プライバシーポリシー">プライバシーポリシー</a>
-      <a href="/免責事項">免責事項</a>
-    </div>
-    <div class="copyright">&copy; 2026 &amp;NUTRITION. All rights reserved.</div>
-  </main>
-
-  <script>
-    (function () {
-      var form = document.getElementById('contact-form');
-      var btn = document.getElementById('submit-btn');
-      var notice = document.getElementById('notice');
-
-      function show(kind, title, body) {
-        notice.className = 'notice show' + (kind === 'error' ? ' error' : '');
-        notice.innerHTML = '<h2></h2><p></p>';
-        notice.querySelector('h2').textContent = title;
-        notice.querySelector('p').textContent = body;
-        notice.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        notice.focus({ preventScroll: true });
-      }
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        btn.disabled = true;
-        btn.textContent = '送信中…';
-
-        fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        })
-        .then(function (res) {
-          if (res.ok) {
-            form.reset();
-            form.style.display = 'none';
-            show('ok', '送信を受け付けました',
-              'お問い合わせありがとうございます。内容を確認し、必要な場合はご入力いただいたメールアドレスにお返事します。');
-          } else {
-            return res.json().catch(function () { return {}; }).then(function (data) {
-              var msg = (data.errors && data.errors.map(function (x) { return x.message; }).join(' / ')) || '';
-              throw new Error(msg || ('status ' + res.status));
-            });
-          }
-        })
-        .catch(function () {
-          show('error', '送信できませんでした',
-            '通信状況をご確認のうえ、もう一度お試しください。入力内容はそのまま残っています。');
-        })
-        .then(function () {
-          btn.disabled = false;
-          btn.textContent = '送信する';
-        });
-      });
-    })();
-  </script>
-</body>
-</html>
+  @media (max-width: 560px) {
+    h1 { font-size: 21px; }
+  }
+  .cards { display: grid; gap: 12px; margin: 24px 0 8px; }
+  .cards a { display: block; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; text-decoration: none; }
+  .cards b { display: block; font-size: 16px; margin-bottom: 2px; }
+  .cards span { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+  .warn { border: 1px solid var(--apricot); border-radius: 10px; padding: 14px 18px; margin: 20px 0; font-size: 14px; }
+  .frm { margin: 24px 0 8px; }
+  .frm label { display: block; font-size: 13px; color: var(--ink-soft); margin: 18px 0 6px; }
+  .frm label small { color: var(--apricot); margin-left: 6px; }
+  .frm input[type=text], .frm input[type=email], .frm select, .frm textarea { width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: inherit; font: inherit; font-size: 16px; }
+  .frm textarea { min-height: 160px; resize: vertical; }
+  .frm .agree { display: flex; gap: 10px; align-items: flex-start; margin: 20px 0; font-size: 13px; }
+  .frm .agree input { margin-top: 4px; }
+  .notice { display: none; border-left: 4px solid var(--apricot); padding: 4px 0 4px 16px; margin: 24px 0; }
+  .notice.show { display: block; }
+  .notice h2 { font-size: 18px; margin: 0 0 6px; }
+  .notice p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+  .notice.error { border-left-color: #e5534b; }
+  .frm button:disabled { opacity: .55; cursor: wait; }
+  .frm button { display: block; width: 100%; min-height: 54px; border: 0; border-radius: 12px; background: var(--apricot); color: #0E1013; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
+  .hp { position: absolute; left: -9999px; }
+  dl.info { margin: 16px 0; }
+  dl.info dt { font-size: 12px; color: var(--ink-soft); margin-top: 16px; }
+  dl.info dd { margin: 2px 0 0; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+</style>
+<style id="brand-theme">
+/* Dark sporty theme matched to the REBORN header */
+:root, :root:not([data-theme="light"]), :root[data-theme="dark"] {
+  --bg:#0E1013; --ink:#F4F4F2; --ink-soft:#A8ADB4;
+  --green:#F2A34C; --green-deep:#F2A34C; --apricot:#F2A34C; --line:#272B31;
+  color-scheme: dark;
+}
+html, body { background: var(--bg); color: var(--ink); }
+h1, h2, h3, .brand, .stat .num {
+  font-family: 'Montserrat','Noto Sans JP',sans-ser
