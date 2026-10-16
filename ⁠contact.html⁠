@@ -106,9 +106,9 @@
       ご質問・ご相談はこちらからお送りください。
     </p>
 
-    <!-- actionにFormspreeのエンドポイント、methodにPOSTを指定 -->
+    <!-- actionに新しいFormspreeのエンドポイントを指定 -->
     <form
-      action="https://formspree.io/f/mzedjoan"
+      action="https://formspree.io/f/xyeklpng"
       method="POST"
     >
       <div class="form-group">
