@@ -106,11 +106,8 @@
       ご質問・ご相談はこちらからお送りください。
     </p>
 
-    <!-- actionに新しいFormspreeのエンドポイントを指定 -->
-    <form
-      action="https://formspree.io/f/xyeklpng"
-      method="POST"
-    >
+    <!-- JSを使わず直接Formspreeへ送信 -->
+    <form action="https://formspree.io/f/xyeklpng" method="POST">
       <div class="form-group">
         <label for="name">
           お名前 <span class="required">（必須）</span>
@@ -127,8 +124,7 @@
 
       <div class="form-group">
         <label for="email">
-          メールアドレス
-          <span class="required">（必須）</span>
+          メールアドレス <span class="required">（必須）</span>
         </label>
         <input
           type="email"
@@ -142,8 +138,7 @@
 
       <div class="form-group">
         <label for="message">
-          お問い合わせ内容
-          <span class="required">（必須）</span>
+          お問い合わせ内容 <span class="required">（必須）</span>
         </label>
         <textarea
           id="message"
