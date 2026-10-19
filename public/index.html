@@ -375,6 +375,45 @@ html.intro-on,html.intro-on body{overflow:hidden}
 .dcard b{display:block;font-size:15px;line-height:1.6;margin:2px 0}
 .dcard .d{display:block;font-size:13px;line-height:1.6;color:var(--ink-soft)}
 @media (hover:hover){.dcard:hover b{color:var(--apricot,#F2A34C)}}
+  /* スキップリンクを通常非表示にする */
+  .intro .skip, .skip, a[href="#main-content"] {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+  }
+  .intro .skip:focus, .skip:focus, a[href="#main-content"]:focus {
+    top: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 8px 16px;
+    background: #000;
+    color: #fff;
+    z-index: 10000;
+  }
+    /* スキップリンクを通常非表示にする */
+  .intro .skip, .skip, a[href="#main-content"] {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+  }
+  .intro .skip:focus, .skip:focus, a[href="#main-content"]:focus {
+    top: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 8px 16px;
+    background: #000;
+    color: #fff;
+    z-index: 10000;
+  }
+
 </style>
 </head>
 <body>
