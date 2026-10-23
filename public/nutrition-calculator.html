@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>必要栄養量を計算する | &NUTRITION</title>
+<style>
+:root{--bg:#0f1115;--card:#161a20;--line:#2a2f38;--text:#f2f3f5;--sub:#9aa1ac;--acc:#f0a04b;--accfg:#1a1206;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f7f7f5;--card:#fff;--line:#dcdcd6;--text:#1b1d21;--sub:#656b75;--acc:#c9741a;--accfg:#fff;color-scheme:light}}
+:root[data-theme="dark"]{--bg:#0f1115;--card:#161a20;--line:#2a2f38;--text:#f2f3f5;--sub:#9aa1ac;--acc:#f0a04b;--accfg:#1a1206}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.7}
+main{max-width:640px;margin:0 auto;padding:28px 20px 56px}
+h1{font-size:1.6rem;margin:0 0 8px;padding-left:14px;border-left:5px solid var(--acc)}
+.lead{color:var(--sub);margin:0 0 28px;font-size:.95rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:20px}
+label,.lb{display:block;font-weight:700;font-size:.9rem;margin:16px 0 6px}
+label:first-child,.lb:first-child{margin-top:0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input[type=number],select{width:100%;font:inherit;font-size:1rem;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--acc);color:var(--accfg);border-color:var(--acc);font-weight:700}
+.chk{display:flex;gap:10px;align-items:center;font-weight:400;margin-top:16px}
+.chk input{width:20px;height:20px;accent-color:var(--acc)}
+.step{display:flex;gap:8px}.step button{width:52px;font:inherit;font-size:1.3rem;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:12px;cursor:pointer}.step input{text-align:center}
+.ex{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.ex label{margin:0 0 4px;font-weight:400;font-size:.8rem;color:var(--sub)}
+.go{width:100%;margin-top:22px;font:inherit;font-weight:700;font-size:1.05rem;color:var(--accfg);background:var(--acc);border:0;border-radius:14px;padding:15px;cursor:pointer}
+.err{color:#ff7a7a;font-size:.9rem;margin:12px 0 0;min-height:1.2em}
+#res{display:none}
+.big{text-align:center;padding:8px 0 18px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.big b{font-size:2.6rem;color:var(--acc);line-height:1.2}
+.big small{display:block;color:var(--sub)}
+.item{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border:0}
+.item span{color:var(--sub);font-size:.88rem;display:block}
+.item strong{white-space:nowrap;text-align:right}
+.note{color:var(--sub);font-size:.8rem}
+</style>
+</head>
+<body>
+<main>
+<h1>必要栄養量を計算する</h1>
+<p class="lead">年齢・体格・活動量から、1日のエネルギーとたんぱく質・脂質・炭水化物などの目安を算出します。</p>
+
+<div class="card">
+  <div class="lb">性別</div>
+  <div class="seg" id="sex"><button type="button" data-v="m" aria-pressed="true">男性</button><button type="button" data-v="f" aria-pressed="false">女性</button></div>
+  <div class="row">
+    <div><label for="age">年齢</label><input id="age" type="number" inputmode="numeric" placeholder="35" min="18" max="120"></div>
+    <div><label for="h">身長 (cm)</label><input id="h" type="number" inputmode="decimal" placeholder="170"></div>
+  </div>
+  <label for="w">体重 (kg)</label><input id="w" type="number" inputmode="decimal" placeholder="65">
+  <label for="pal">日常の活動量（運動は除く）</label>
+  <select id="pal">
+    <option value="0">低い：ほぼ座位、デスクワーク中心</option>
+    <option value="1" selected>ふつう：座位中心だが通勤・家事などで適度に動く</option>
+    <option value="2">高い：立ち仕事・移動が多い</option>
+  </select>
+  <label for="goal">目標（1日の増減kcal）</label>
+  <div class="step"><button type="button" id="gm" aria-label="100kcal減らす">−</button><input id="goal" type="number" inputmode="numeric" step="100" min="-1000" max="1000" value="0"><button type="button" id="gp" aria-label="100kcal増やす">＋</button></div>
+  <p class="note" style="margin:6px 0 0">マイナスで減量、プラスで増量、0で体重維持。100kcal単位で調整できます。</p>
+  <div class="lb">運動習慣（1週間の合計時間・分）</div>
+  <div class="ex">
+    <div><label for="wk">ウォーキング</label><input id="wk" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+    <div><label for="rn">ランニング</label><input id="rn" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+    <div><label for="st">筋トレ</label><input id="st" type="number" inputmode="numeric" min="0" placeholder="0"></div>
+  </div>
+  <p class="note" style="margin:6px 0 0">運動で消費するエネルギーを加算します。筋トレがある場合はたんぱく質の目安も上がります。</p>
+  <button class="go" id="calc" type="button">計算する</button>
+  <p class="err" id="err" role="alert"></p>
+</div>
+
+<div class="card" id="res">
+  <div class="big"><small>1日の推定エネルギー必要量</small><b id="kcal">-</b> <span>kcal</span><small id="bmr"></small></div>
+  <div class="item"><div>たんぱく質<span id="pnote"></span></div><strong id="p"></strong></div>
+  <div class="item"><div>脂質<span>エネルギーの20〜30%</span></div><strong id="f"></strong></div>
+  <div class="item"><div>炭水化物<span>エネルギーの50〜65%</span></div><strong id="c"></strong></div>
+  <div class="item"><div>食物繊維<span>目標量（下限）</span></div><strong id="fi"></strong></div>
+  <div class="item"><div>食塩相当量<span>目標量（上限）</span></div><strong id="na"></strong></div>
+  <p class="note">※「日本人の食事摂取基準（2025年版）」の考え方に基づく目安です。腎臓病などで食事制限がある方、妊娠・授乳中の方、持病のある方は、必ず医師・管理栄養士にご相談ください。</p>
+</div>
+</main>
+<script>
+(function(){
+  var sex='m';
+  var btns=document.querySelectorAll('#sex button');
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    sex=b.dataset.v;btns.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+  })});
+  var $=function(i){return document.getElementById(i)};
+  function r(n,u){return Math.round(n/u)*u}
+  function g(d){var v=(+$('goal').value||0)+d;$('goal').value=Math.max(-1000,Math.min(1000,Math.round(v/100)*100))}
+  $('gm').addEventListener('click',function(){g(-100)});
+  $('gp').addEventListener('click',function(){g(100)});
+  $('goal').addEventListener('change',function(){g(0)});
+  $('calc').addEventListener('click',function(){
+    var age=+$('age').value,w=+$('w').value,h=+$('h').value;
+    if(!(age>=18)||!(w>0)||!(h>0)){$('err').textContent='年齢（18歳以上）・身長・体重を入力してください。';$('res').style.display='none';return}
+    $('err').textContent='';
+    // 基礎代謝基準値 (kcal/kg/日)
+    var tbl={m:[23.7,22.5,21.8,21.6,21.5],f:[22.1,21.9,20.7,20.7,20.7]};
+    var i=age<30?0:age<50?1:age<65?2:age<75?3:4;
+    var bmr=tbl[sex][i]*w;
+    var pals=age<65?[1.5,1.75,2.0]:[1.45,1.7,1.95];
+    var ex=(3.5*(+$('wk').value||0)+8*(+$('rn').value||0)+4*(+$('st').value||0))/60*w*1.05/7;
+    var kcal=bmr*pals[+$('pal').value]+ex+(+$('goal').value||0);
+    if(kcal<bmr)kcal=bmr;
+    var pLo,pHi,pn;
+    if((+$('st').value||0)>0){pLo=1.2*w;pHi=1.6*w;pn='筋トレ習慣あり：体重×1.2〜1.6g'}
+    else{var lo=age<50?.13:age<65?.14:.15;pLo=kcal*lo/4;pHi=kcal*.2/4;pn='エネルギーの'+Math.round(lo*100)+'〜20%'}
+    $('kcal').textContent=r(kcal,10).toLocaleString();
+    $('bmr').textContent='基礎代謝量の目安 約'+r(bmr,10).toLocaleString()+' kcal'+(ex>0?'／運動分 約'+r(ex,10)+' kcal':'');
+    $('p').textContent=r(pLo,5)+'〜'+r(pHi,5)+' g';$('pnote').textContent=pn;
+    $('f').textContent=r(kcal*.2/9,1)+'〜'+r(kcal*.3/9,1)+' g';
+    $('c').textContent=r(kcal*.5/4,5)+'〜'+r(kcal*.65/4,5)+' g';
+    $('fi').textContent=(sex==='m'?(age<65?22:21):18)+' g以上';
+    $('na').textContent=(sex==='m'?7.5:6.5)+' g未満';
+    $('res').style.display='block';
+    $('res').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
+</body>
+</html>
