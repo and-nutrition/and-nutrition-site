@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
 <title>必要栄養量を計算する | &NUTRITION</title>
 <style>
 :root{--bg:#0f1115;--card:#161a20;--line:#2a2f38;--text:#f2f3f5;--sub:#9aa1ac;--acc:#f0a04b;--accfg:#1a1206;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f7f7f5;--card:#fff;--line:#dcdcd6;--text:#1b1d21;--sub:#656b75;--acc:#c9741a;--accfg:#fff;color-scheme:light}}
-:root[data-theme="dark"]{--bg:#0f1115;--card:#161a20;--line:#2a2f38;--text:#f2f3f5;--sub:#9aa1ac;--acc:#f0a04b;--accfg:#1a1206}
+html{background:#0f1115}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.7}
 main{max-width:640px;margin:0 auto;padding:28px 20px 56px}
@@ -22,10 +22,9 @@ input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px}
 .seg{display:flex;gap:8px}
 .seg button{flex:1;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}
 .seg button[aria-pressed=true]{background:var(--acc);color:var(--accfg);border-color:var(--acc);font-weight:700}
-.chk{display:flex;gap:10px;align-items:center;font-weight:400;margin-top:16px}
-.chk input{width:20px;height:20px;accent-color:var(--acc)}
-.step{display:flex;gap:8px}.step button{width:52px;font:inherit;font-size:1.3rem;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:12px;cursor:pointer}.step input{text-align:center}
-.ex{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.ex label{margin:0 0 4px;font-weight:400;font-size:.8rem;color:var(--sub)}
+.exr{display:grid;grid-template-columns:1fr 92px 44px;gap:8px;margin-bottom:8px}
+.exr button{font:inherit;font-size:1.2rem;color:var(--sub);background:var(--bg);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.add{width:100%;font:inherit;font-size:.95rem;color:var(--acc);background:transparent;border:1px dashed var(--acc);border-radius:12px;padding:10px;cursor:pointer;margin-top:2px}
 .go{width:100%;margin-top:22px;font:inherit;font-weight:700;font-size:1.05rem;color:var(--accfg);background:var(--acc);border:0;border-radius:14px;padding:15px;cursor:pointer}
 .err{color:#ff7a7a;font-size:.9rem;margin:12px 0 0;min-height:1.2em}
 #res{display:none}
@@ -58,15 +57,9 @@ input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px}
     <option value="1" selected>ふつう：座位中心だが通勤・家事などで適度に動く</option>
     <option value="2">高い：立ち仕事・移動が多い</option>
   </select>
-  <label for="goal">目標（1日の増減kcal）</label>
-  <div class="step"><button type="button" id="gm" aria-label="100kcal減らす">−</button><input id="goal" type="number" inputmode="numeric" step="100" min="-1000" max="1000" value="0"><button type="button" id="gp" aria-label="100kcal増やす">＋</button></div>
-  <p class="note" style="margin:6px 0 0">マイナスで減量、プラスで増量、0で体重維持。100kcal単位で調整できます。</p>
-  <div class="lb">運動習慣（1週間の合計時間・分）</div>
-  <div class="ex">
-    <div><label for="wk">ウォーキング</label><input id="wk" type="number" inputmode="numeric" min="0" placeholder="0"></div>
-    <div><label for="rn">ランニング</label><input id="rn" type="number" inputmode="numeric" min="0" placeholder="0"></div>
-    <div><label for="st">筋トレ</label><input id="st" type="number" inputmode="numeric" min="0" placeholder="0"></div>
-  </div>
+  <div class="lb">運動習慣（種目と、1週間の合計時間・分）</div>
+  <div id="exs"></div>
+  <button type="button" class="add" id="addEx">＋ 種目を追加</button>
   <p class="note" style="margin:6px 0 0">運動で消費するエネルギーを加算します。筋トレがある場合はたんぱく質の目安も上がります。</p>
   <button class="go" id="calc" type="button">計算する</button>
   <p class="err" id="err" role="alert"></p>
@@ -91,10 +84,30 @@ input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px}
   })});
   var $=function(i){return document.getElementById(i)};
   function r(n,u){return Math.round(n/u)*u}
-  function g(d){var v=(+$('goal').value||0)+d;$('goal').value=Math.max(-1000,Math.min(1000,Math.round(v/100)*100))}
-  $('gm').addEventListener('click',function(){g(-100)});
-  $('gp').addEventListener('click',function(){g(100)});
-  $('goal').addEventListener('change',function(){g(0)});
+  var G=[
+   ['歩く・走る',[['ウォーキング（ふつう）',3],['ウォーキング（やや速め）',4.3],['ウォーキング（速め）',5],['ハイキング',5.3],['山登り（軽い荷物）',6.5],['ジョギング（ゆっくり）',6],['ジョギング',7],['ランニング（時速8km）',8.3],['ランニング（時速10km）',9.8],['階段の昇り降り（ゆっくり）',4],['階段の昇り降り（速く）',8.8]]],
+   ['筋トレ・体づくり',[['筋トレ（ウェイト・ふつう）',3.5,1],['筋トレ（ウェイト・高強度）',6,1],['スクワットなど（自重）',5],['腕立て・腹筋（ほどほど）',3.8],['ストレッチ',2.3],['ヨガ',2.5],['ピラティス・太極拳',3],['ラジオ体操第1',4],['ラジオ体操第2',4.5],['エアロビクス',7.3],['縄跳び（ゆっくり）',8.8],['縄跳び（速い）',12.3]]],
+   ['自転車・水泳',[['サイクリング（ゆったり）',4],['サイクリング（ふつう）',6.8],['サイクリング（速い）',8],['水泳（ゆっくり）',5.8],['水泳（ふつう）',8.3],['水泳（速い）',10],['水中ウォーキング',4.5],['アクアビクス',5.3]]],
+   ['球技',[['野球・ソフトボール',5],['テニス（ダブルス）',4.5],['テニス（シングルス）',7.3],['バドミントン',5.5],['卓球',4],['サッカー',7],['バスケットボール',6],['バレーボール',3],['ハンドボール',7],['ラグビー',8.3],['ゴルフ（カート使用）',3.5],['ゴルフ（クラブを担いで歩く）',4.3],['ボウリング',3]]],
+   ['武道・ダンス',[['柔道・空手・キックボクシングなど',10.3],['社交ダンス（ゆっくり）',3],['バレエ・ジャズダンス',5]]],
+   ['その他',[['スキー',5.3],['スケート',7],['サーフィン',5],['ロッククライミング（低〜中難度）',5.8],['ロッククライミング（高難度）',7.5]]]
+  ];
+  var EX=[];G.forEach(function(g){g[1].forEach(function(e){e.k=EX.length;EX.push(e)})});
+  var exs=$('exs');
+  function addRow(){
+    var d=document.createElement('div');d.className='exr';
+    var sel=document.createElement('select');sel.setAttribute('aria-label','種目');
+    var o0=document.createElement('option');o0.value='';o0.textContent='種目を選ぶ';sel.appendChild(o0);
+    G.forEach(function(g){var og=document.createElement('optgroup');og.label=g[0];
+      g[1].forEach(function(e){var o=document.createElement('option');o.value=e.k;o.textContent=e[0];og.appendChild(o)});
+      sel.appendChild(og)});
+    var m=document.createElement('input');m.type='number';m.min='0';m.setAttribute('inputmode','numeric');m.placeholder='分/週';m.setAttribute('aria-label','週の合計分');
+    var x=document.createElement('button');x.type='button';x.textContent='×';x.setAttribute('aria-label','この行を削除');
+    x.addEventListener('click',function(){if(exs.children.length>1)exs.removeChild(d);else{sel.value='';m.value=''}});
+    d.appendChild(sel);d.appendChild(m);d.appendChild(x);exs.appendChild(d);
+  }
+  addRow();
+  $('addEx').addEventListener('click',addRow);
   $('calc').addEventListener('click',function(){
     var age=+$('age').value,w=+$('w').value,h=+$('h').value;
     if(!(age>=18)||!(w>0)||!(h>0)){$('err').textContent='年齢（18歳以上）・身長・体重を入力してください。';$('res').style.display='none';return}
@@ -104,11 +117,16 @@ input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px}
     var i=age<30?0:age<50?1:age<65?2:age<75?3:4;
     var bmr=tbl[sex][i]*w;
     var pals=age<65?[1.5,1.75,2.0]:[1.45,1.7,1.95];
-    var ex=(3.5*(+$('wk').value||0)+8*(+$('rn').value||0)+4*(+$('st').value||0))/60*w*1.05/7;
-    var kcal=bmr*pals[+$('pal').value]+ex+(+$('goal').value||0);
-    if(kcal<bmr)kcal=bmr;
+    var met=0,strength=0;
+    Array.prototype.forEach.call(exs.children,function(d){
+      var k=d.children[0].value,mn=+d.children[1].value||0;
+      if(k===''||mn<=0)return;
+      met+=EX[k][1]*mn;if(EX[k][2])strength+=mn;
+    });
+    var ex=met/60*w*1.05/7;
+    var kcal=bmr*pals[+$('pal').value]+ex;
     var pLo,pHi,pn;
-    if((+$('st').value||0)>0){pLo=1.2*w;pHi=1.6*w;pn='筋トレ習慣あり：体重×1.2〜1.6g'}
+    if(strength>0){pLo=1.2*w;pHi=1.6*w;pn='筋トレ習慣あり：体重×1.2〜1.6g'}
     else{var lo=age<50?.13:age<65?.14:.15;pLo=kcal*lo/4;pHi=kcal*.2/4;pn='エネルギーの'+Math.round(lo*100)+'〜20%'}
     $('kcal').textContent=r(kcal,10).toLocaleString();
     $('bmr').textContent='基礎代謝量の目安 約'+r(bmr,10).toLocaleString()+' kcal'+(ex>0?'／運動分 約'+r(ex,10)+' kcal':'');
